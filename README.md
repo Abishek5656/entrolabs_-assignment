@@ -2,6 +2,8 @@
 ## Demo
 https://github.com/Abishek5656/suryaabishekvarma_ass/assets/99088871/a32f090d-0f4d-4e2f-ad5f-6b343a4917e7
 
+If we submit the  same data multiple times, it's showing an error saying "duplicate key"
+
 
 ## Prerequisit
  Node version 20.x

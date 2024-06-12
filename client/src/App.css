@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* input, select {
+    outline: none;
+} */
+
+
+/* Hide scrollbars on Chrome */
+::-webkit-scrollbar {
+    display: none;
+}

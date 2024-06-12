@@ -115,16 +115,6 @@ const Form = () => {
           queryData?.length > 0 ? (
             <div className="shadow-xl absolute top-22 z-30 max-w-2xl h-[250px] overflow-scroll bg-gray-200 space-y-6 px-2 py-1 rounded">
               {queryData.map((medicine) => {
-                const {
-                  name,
-                  label,
-                  manufacturer,
-                  price,
-                  quantity,
-                  skuid,
-                  type,
-                } = medicine;
-
                 return (
                   <MenuList
                     medicine={medicine}

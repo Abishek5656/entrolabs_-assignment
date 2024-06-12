@@ -15,7 +15,7 @@ const Form = () => {
     composition: "",
     quantity: "",
     price: "",
-});
+  });
   const [openModel, setModel] = useState(false);
   const [queryData, setQueryDate] = useState([]);
 
@@ -26,23 +26,23 @@ const Form = () => {
     });
   };
 
-  async function getData() {
+  const getData = async () => {
     try {
       const response = await axios.get(
         `https://api.91.care/pharmap/new/search.php?q=${formData?.name}`
       );
       setQueryDate(response?.data?.sku);
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     let timeout;
     if (formData.name) {
       timeout = setTimeout(() => {
         getData();
-      }, 200);
+      }, 50);
     }
 
     return () => {
@@ -73,7 +73,7 @@ const Form = () => {
         import.meta.env.VITE_BACKEND_ENDPOINT,
         formData
       );
-      toast.success(response?.data?.data)
+      toast.success(response?.data?.data);
       setFormData({
         name: "",
         manufacturer: "",
@@ -83,7 +83,7 @@ const Form = () => {
         composition: "",
         quantity: "",
         price: "",
-      })
+      });
     } catch (error) {
       toast.error(error.message);
     }

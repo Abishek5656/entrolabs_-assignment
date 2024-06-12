@@ -33,7 +33,7 @@ const Form = () => {
       );
       setQueryDate(response?.data?.sku);
     } catch (error) {
-      console.error(error);
+      toast.error(error.message)
     }
   }
 
@@ -86,7 +86,6 @@ const Form = () => {
       })
     } catch (error) {
       toast.error(error.message);
-
     }
   };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ memo } from "react";
 
 const MenuList = ({ medicine, handleSelectMedicine }) => {
   const { name, label, manufacturer, price, quantity, skuid, type } = medicine;
@@ -19,4 +19,4 @@ const MenuList = ({ medicine, handleSelectMedicine }) => {
   );
 };
 
-export default MenuList;
+export default memo(MenuList);

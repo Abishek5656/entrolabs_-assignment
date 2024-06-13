@@ -18,8 +18,14 @@ const Form = () => {
   });
   const [openModel, setModel] = useState(false);
   const [queryData, setQueryDate] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
+
+    if(formData.length === 0) {
+      setModel(false)
+    }
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -67,33 +73,37 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     try {
       const response = await axios.post(
-        import.meta.env.VITE_BACKEND_ENDPOINT,
+        `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
         formData
       );
+   
       toast.success(response?.data?.data);
-      setFormData({
-        name: "",
-        manufacturer: "",
-        skuType: "",
-        skuId: "",
-        skuLabel: "",
-        composition: "",
-        quantity: "",
-        price: "",
-      });
+
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Already Medicine Exist");
     }
+    setFormData({
+      name: "",
+      manufacturer: "",
+      skuType: "",
+      skuId: "",
+      skuLabel: "",
+      composition: "",
+      quantity: "",
+      price: "",
+    });
+    setLoading(false)
   };
 
   return (
-    <div className="max-w-2xl h-full flex flex-col m-auto p-2">
+    <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
       <Title title="New Sku" />
       <form
-        className="mt-5 h-full border-solid space-y-6"
+        className="mt-5 h-full w-full border-solid space-y-5"
         onSubmit={handleSubmit}
       >
         {/* Name */}
@@ -103,7 +113,7 @@ const Form = () => {
             name="name"
             className=" appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             type="text"
-            placeholder="name"
+            placeholder="Name"
             value={formData.name}
             onChange={handleChange}
             onFocus={() => setModel(true)}
@@ -111,7 +121,7 @@ const Form = () => {
         </div>
         {openModel ? (
           queryData?.length > 0 ? (
-            <div className="shadow-xl absolute top-22 z-30 max-w-2xl h-[250px] overflow-scroll bg-gray-200 space-y-6 px-2 py-1 rounded">
+            <div className="shadow-2xl absolute top-28 z-30  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
               {queryData?.map((medicine) => {
                 return (
                   <MenuList
@@ -220,9 +230,11 @@ const Form = () => {
         <div>
           <button
             type="submit"
+
             className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
           >
-            Submit
+           
+            {loading ? <p>Loading</p> : <p>Submit</p>}
           </button>
         </div>
       </form>

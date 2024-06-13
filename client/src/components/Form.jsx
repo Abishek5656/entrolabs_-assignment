@@ -39,10 +39,10 @@ const Form = () => {
 
   useEffect(() => {
     let timeout;
-    if (formData.name) {
+    if (formData.name.length > 0) {
       timeout = setTimeout(() => {
         getData();
-      }, 50);
+      }, 100);
     }
 
     return () => {

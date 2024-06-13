@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import Title from "./Title.jsx";
 import MenuList from "./MenuList.jsx";
 import { toast } from "react-toastify";
+import { RxCrossCircled } from "react-icons/rx";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -95,6 +96,20 @@ const Form = () => {
     setLoading(false)
   };
 
+  const handleCross = () => {
+    console.log("cross pressed")
+    setFormData({
+      name: "",
+      manufacturer: "",
+      skuType: "",
+      skuId: "",
+      skuLabel: "",
+      composition: "",
+      quantity: "",
+      price: "",
+    });
+  }
+
   return (
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
       <Title title="New Sku" />
@@ -105,15 +120,21 @@ const Form = () => {
         {/* Name */}
         <div className="flex flex-col relative">
           <label className="font-bold">Name</label>
+          <div className="relative">
           <input
             name="name"
             className=" appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             type="text"
-            placeholder="Name"
+            placeholder="Enter at least 3 Characters"
             value={formData.name}
             onChange={handleChange}
             onFocus={() => setModel(true)}
           />
+          <RxCrossCircled className="absolute top-5 right-3" size={15} 
+          onClick={handleCross}
+          />
+          </div>
+        
 
 {openModel ? (
           queryData?.length > 0 ? (
@@ -204,9 +225,10 @@ const Form = () => {
           <input
             name="quantity"
             className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="type"
+            type="number"
+            min={0}
             placeholder="quantity"
-            value={formData.quantity}
+            value={Number(formData.quantity)}
             onChange={handleChange}
           />
         </div>
@@ -217,9 +239,10 @@ const Form = () => {
           <input
             name="price"
             className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="text"
+            type="number"
+            min={0}
             placeholder="price"
-            value={formData.price}
+            value={Number(formData.price)}
             onChange={handleChange}
           />
         </div>

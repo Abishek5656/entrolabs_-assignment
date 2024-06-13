@@ -35,13 +35,14 @@ const createMedicine = asyncHandler(async (req, res) => {
 
   // Check if the  medicine was successfully created
   if (!medicine) {
-    throw new ApiError(400, "Failed to create  medicine");
+    return res.status(400).json(new ApiError(400, "Failed to create medicine"))
+
   }
 
   // Return the response
   return res
     .status(201)
-    .json(new ApiResponse(201, "Medicine successfully saved"));
+    .json(new ApiResponse(201,{} ,"Medicine successfully saved"));
 });
 
 export { createMedicine };

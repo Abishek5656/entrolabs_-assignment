@@ -22,7 +22,7 @@ const Form = () => {
 
   const handleChange = (e) => {
 
-    if(formData.length === 0) {
+    if(formData.name.length === 0) {
       setModel(false)
     }
 

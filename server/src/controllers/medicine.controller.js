@@ -18,7 +18,7 @@ const createMedicine = asyncHandler(async (req, res) => {
   const existingMedicine = await Medicine.findOne({ skuId: skuId });
 
   if (existingMedicine) {
-    throw new ApiError(400, "Already Medicine Exist");
+    return res.status(400).json(new ApiError(400, "Already Medicine Exist"));
   }
 
   // Create the Medicine

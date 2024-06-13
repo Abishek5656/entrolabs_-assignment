@@ -84,7 +84,7 @@ const Form = () => {
       toast.success(response?.data?.data);
 
     } catch (error) {
-      toast.error("Already Medicine Exist");
+      toast.error(error.message);
     }
     setFormData({
       name: "",
@@ -121,7 +121,7 @@ const Form = () => {
 
 {openModel ? (
           queryData?.length > 0 ? (
-            <div className="shadow-2xl absolute top-20 z-30  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
+            <div className="shadow-2xl absolute top-20 z-30 w-full  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
               {queryData?.map((medicine) => {
                 return (
                   <MenuList
@@ -135,22 +135,6 @@ const Form = () => {
           ) : null
         ) : null}
         </div>
-        {/* {openModel ? (
-          queryData?.length > 0 ? (
-            <div className="shadow-2xl absolute top-28 z-30  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded  border-2
-         border-green-950 border-solid">
-              {queryData?.map((medicine) => {
-                return (
-                  <MenuList
-                    medicine={medicine}
-                    key={uuidv4()}
-                    handleSelectMedicine={handleSelectMedicine}
-                  />
-                );
-              })}
-            </div>
-          ) : null
-        ) : null} */}
 
         {/* Manufacturer */}
         <div className=" flex flex-col">

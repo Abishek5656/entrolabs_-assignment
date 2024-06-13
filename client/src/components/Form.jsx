@@ -95,8 +95,7 @@ const Form = () => {
     setLoading(false);
   };
 
-  const handleCross = () => {
-    console.log("cross pressed");
+  const handleRemoveText = () => {
     setFormData({
       name: "",
       manufacturer: "",
@@ -122,7 +121,7 @@ const Form = () => {
               name="name"
               className=" appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               type="text"
-              placeholder="Enter at least 3 Characters"
+              placeholder="Enter at least 4 Characters"
               value={formData.name}
               onChange={handleChange}
               onFocus={() => setModel(true)}
@@ -132,25 +131,25 @@ const Form = () => {
               <RxCrossCircled
                 className="absolute top-5 right-3"
                 size={15}
-                onClick={handleCross}
+                onClick={handleRemoveText}
               />
             ) : null}
           </div>
 
           {openModel ? (
-            queryData?.length > 0 ? (
-              <div className="shadow-2xl absolute top-20 z-30 w-full  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
-                {queryData?.map((medicine) => {
-                  return (
-                    <MenuList
-                      medicine={medicine}
-                      key={uuidv4()}
-                      handleSelectMedicine={handleSelectMedicine}
-                    />
-                  );
-                })}
-              </div>
-            ) : null
+            <div className="shadow-2xl absolute top-20 z-30 w-full max-h-44 overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
+              {queryData?.length > 0 ? (
+                queryData.map((medicine) => (
+                  <MenuList
+                    medicine={medicine}
+                    key={uuidv4()}
+                    handleSelectMedicine={handleSelectMedicine}
+                  />
+                ))
+              ) : (
+                <p>No results</p>
+              )}
+            </div>
           ) : null}
         </div>
 

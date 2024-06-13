@@ -14,7 +14,7 @@ const MenuList = ({ medicine, handleSelectMedicine }) => {
               <span className="text-blue-600">{label}</span>|
               <p>MRP {price}</p>
             </div>
-            <hr className="mt-1" />
+            <hr className="mt-1 bottom-2 border-red-600 border-solid" />
           </div>
   );
 };

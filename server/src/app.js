@@ -13,7 +13,7 @@ app.use(express.json({limit: "16kb"}))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("public"))
 
-app.get("/api/v1/medicine/", () => {
+app.get("/api/v1/medicine/", (req, res) => {
     return res.status(200).json("Hi from web server")
 })
 

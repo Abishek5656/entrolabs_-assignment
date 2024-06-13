@@ -1,15 +1,12 @@
 
 ## Demo
-https://github.com/Abishek5656/suryaabishekvarma_ass/assets/99088871/5a22513d-0893-4cef-a2b8-d04b37cea604
-
-If we submit the  same data multiple times, it's showing an error saying "duplicate key"
-
+https://github.com/Abishek5656/entrolabs_-assignment/assets/99088871/06886636-04e4-42b5-9a78-2ee89b0b16fd
 
 ## Prerequisites
  Node version 20.x
 ## Cloning the repository
 
-https://github.com/Abishek5656/suryaabishekvarma_ass.git
+https://github.com/Abishek5656/entrolabs_assignment.git
 ## Install packages
 
 npm install

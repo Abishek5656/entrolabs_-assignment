@@ -103,7 +103,7 @@ const Form = () => {
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
       <Title title="New Sku" />
       <form
-        className="mt-5 h-full w-full border-solid space-y-5"
+        className="mt-5 h-full w-full space-y-5"
         onSubmit={handleSubmit}
       >
         {/* Name */}
@@ -118,10 +118,10 @@ const Form = () => {
             onChange={handleChange}
             onFocus={() => setModel(true)}
           />
-        </div>
-        {openModel ? (
+
+{openModel ? (
           queryData?.length > 0 ? (
-            <div className="shadow-2xl absolute top-28 z-30  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
+            <div className="shadow-2xl absolute top-20 z-30  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
               {queryData?.map((medicine) => {
                 return (
                   <MenuList
@@ -134,6 +134,23 @@ const Form = () => {
             </div>
           ) : null
         ) : null}
+        </div>
+        {/* {openModel ? (
+          queryData?.length > 0 ? (
+            <div className="shadow-2xl absolute top-28 z-30  h-[250px] overflow-scroll bg-gray-200 space-y-4 p-1 rounded  border-2
+         border-green-950 border-solid">
+              {queryData?.map((medicine) => {
+                return (
+                  <MenuList
+                    medicine={medicine}
+                    key={uuidv4()}
+                    handleSelectMedicine={handleSelectMedicine}
+                  />
+                );
+              })}
+            </div>
+          ) : null
+        ) : null} */}
 
         {/* Manufacturer */}
         <div className=" flex flex-col">

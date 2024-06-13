@@ -21,11 +21,6 @@ const Form = () => {
   const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
-
-    if(formData.name.length === 0) {
-      setModel(false)
-    }
-
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -33,6 +28,7 @@ const Form = () => {
   };
 
   const getData = async () => {
+    
     try {
       const response = await axios.get(
         `https://api.91.care/pharmap/new/search.php?q=${formData?.name}`
@@ -41,6 +37,7 @@ const Form = () => {
     } catch (error) {
       toast.error(error.message);
     }
+   
   };
 
   useEffect(() => {
@@ -80,11 +77,10 @@ const Form = () => {
         `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
         formData
       );
-   
-      toast.success(response?.data?.data);
-
+      console.log(response)
+      toast.success(response?.data?.message);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error?.response?.data?.message);
     }
     setFormData({
       name: "",

@@ -6,7 +6,7 @@ https://github.com/Abishek5656/entrolabs_-assignment/assets/99088871/06886636-04
  Node version 20.x
 ## Cloning the repository
 
-https://github.com/Abishek5656/suryaabishekvarma_ass.git
+https://github.com/Abishek5656/entrolabs_assignment.git
 ## Install packages
 
 npm install

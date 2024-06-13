@@ -109,11 +109,10 @@ const Form = () => {
             onFocus={() => setModel(true)}
           />
         </div>
-
         {openModel ? (
           queryData?.length > 0 ? (
             <div className="shadow-xl absolute top-22 z-30 max-w-2xl h-[250px] overflow-scroll bg-gray-200 space-y-6 px-2 py-1 rounded">
-              {queryData.map((medicine) => {
+              {queryData?.map((medicine) => {
                 return (
                   <MenuList
                     medicine={medicine}

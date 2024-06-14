@@ -1,15 +1,16 @@
-import React, { Fragment, useMemo, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
-import InputButton from "../shared/InputButton.jsx";
-import Model from "../shared/Modal.jsx";
 import useFetchData from "../hooks/useFetchData.js";
-import Title from "./Title.jsx";
 
+// import Title from "../shared/Title.jsx";
+// import Modal from "../shared/Modal.jsx";
+// import MenuList from "../shared/MenuList.jsx";
+// import InputButton from "../shared/InputButton.jsx";
+import { Title, Modal, MenuList, InputButton } from "../shared/index.js";
 
 const Form = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: "",
     manufacturer: "",
@@ -23,14 +24,12 @@ const Form = () => {
   const [openModel, setModel] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const { queryData } = useFetchData(
-    'https://api.91.care/pharmap/new/search.php',
+    "https://api.91.care/pharmap/new/search.php",
     formData?.name
   );
 
-  console.log("queryData in form component", queryData)
-
+  console.log("queryData in form component", queryData);
 
   const handleChange = (e) => {
     setFormData({
@@ -40,7 +39,16 @@ const Form = () => {
   };
 
   const handleSelectMedicine = (medicine) => {
-    const { name, manufacturer, type, skuid,composition,price,quantity,label,} = medicine;
+    const {
+      name,
+      manufacturer,
+      type,
+      skuid,
+      composition,
+      price,
+      quantity,
+      label,
+    } = medicine;
     setModel(false);
     setFormData({
       name,
@@ -96,9 +104,11 @@ const Form = () => {
 
   return (
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
-
-      <Link to={"/"} className=" m-2 group relative w-[200px] h-[40px] text-center
-       py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+      <Link
+        to={"/"}
+        className=" m-2 group relative w-[200px] h-[40px] text-center
+       py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+      >
         Back to Home Page
       </Link>
 
@@ -106,7 +116,6 @@ const Form = () => {
       <form className="mt-5 h-full w-full space-y-5" onSubmit={handleSubmit}>
         {/* Name */}
         <div className="flex flex-col relative">
-
           <label className="font-bold">Name</label>
           <div className="relative">
             <input
@@ -128,8 +137,8 @@ const Form = () => {
           </div>
 
           {openModel ? (
-            <Model
-              queryData={ queryData}
+            <Modal
+              queryData={queryData}
               handleSelectMedicine={handleSelectMedicine}
             />
           ) : null}

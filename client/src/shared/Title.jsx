@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Title = ({ title }) => {
   return (
-    <h1 className="text-2xl uppercase">{title}</h1>
+    <h1 className="text-xl uppercase font-medium flex items-center">{title}</h1>
   );
 }
 

@@ -8,13 +8,28 @@ import { Medicine } from "../models/medicine.model.js";
 
 const getRecords = asyncHandler( async(req, res) => {
 
-   const medicineRecords = await Medicine.find();
+  const medicineRecords = await Medicine.aggregate([
+    {
+      $project: {
+        _id: 0,
+        name: 1,
+        manufacturer: 1,
+        skuType: 1,
+        skuId: 1,
+        skuLabel: 1,
+        composition: 1,
+        quantity: 1,
+        price: 1
+      }
+    }
+  ]);
+  
 
    if(medicineRecords.length === 0) {
      return res.status(400).json(new ApiError(400, "Medicine Records Not Found"))
    }
 
-   return res.status(200).json(new ApiResponse(200, medicineRecords))
+   return res.status(200).json(new ApiResponse(200,  medicineRecords))
 })
 
 

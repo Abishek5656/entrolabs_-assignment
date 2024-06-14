@@ -35,15 +35,7 @@ const Form = () => {
   };
 
   const handleSelectMedicine = (medicine) => {
-    const {
-      name,
-      manufacturer,
-      type,
-      skuid,
-      composition,
-      price,
-      quantity,
-      label,
+    const {  name, manufacturer, type, skuid, composition, price, quantity, label,
     } = medicine;
     setModel(false);
     setFormData({

@@ -13,7 +13,7 @@ const Medicines = () => {
       <div className="mt-2 flex justify-between">
         <Title title="List Of Records" />
 
-        <div className="flex items-center gap-2">
+        <div className="flex justify-between items-center gap-2">
           <input
             placeholder="Search"
             value={query}
@@ -24,10 +24,10 @@ const Medicines = () => {
 
           <Link
             to={"/form"}
-            className="flex items-center py-2 px-3 border border-transparent text-sm rounded-md text-white bg-blue-700 hover:bg-blue-500"
+            className="flex items-center py-2 px-3 border border-transparent text-sm rounded-md text-white bg-blue-700 hover:bg-blue-500 "
           >
             <IoMdAdd size={20} />
-            New Sku
+            
           </Link>
         </div>
       </div>

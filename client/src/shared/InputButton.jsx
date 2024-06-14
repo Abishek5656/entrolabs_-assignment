@@ -28,7 +28,7 @@ const InputButton = ({
 InputButton.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["text", "number", "email"]).isRequired,
+  type: PropTypes.oneOf(["text", "number"]).isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onChange: PropTypes.func.isRequired,

@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 const MenuList = ({ medicine, handleSelectMedicine }) => {
-  const { name, label, manufacturer, price, skuid } = medicine;
+  const { name, label, manufacturer, price  } = medicine;
   return (
     <div
       className="px-1 rounded hover:cursor-pointer hover:bg-slate-50"
@@ -24,8 +24,7 @@ MenuList.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     manufacturer: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    skuid: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
   handleSelectMedicine: PropTypes.func.isRequired,
 };

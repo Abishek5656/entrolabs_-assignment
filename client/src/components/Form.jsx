@@ -1,11 +1,11 @@
 import React, { Fragment, useMemo, useEffect, useState } from "react";
-import InputButton from "../shared/InputButton.jsx";
-import Model from "../shared/Modal.jsx";
-import axios from "axios";
-import Title from "./Title.jsx";
-import { toast } from "react-toastify";
 import { RxCrossCircled } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
+import InputButton from "../shared/InputButton.jsx";
+import Model from "../shared/Modal.jsx";
+import useFetchData from "../hooks/useFetchData.js";
+import Title from "./Title.jsx";
+
 
 const Form = () => {
   const navigate = useNavigate();
@@ -20,10 +20,17 @@ const Form = () => {
     quantity: "",
     price: "",
   });
-
   const [openModel, setModel] = useState(false);
-  const [queryData, setQueryDate] = useState([]);
   const [loading, setLoading] = useState(false);
+
+
+  const { queryData } = useFetchData(
+    'https://api.91.care/pharmap/new/search.php',
+    formData?.name
+  );
+
+  console.log("queryData in form component", queryData)
+
 
   const handleChange = (e) => {
     setFormData({
@@ -31,21 +38,6 @@ const Form = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.91.care/pharmap/new/search.php?q=${formData?.name}`
-        );
-        setQueryDate(response?.data?.sku);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-    getData();
-  }, [formData.name]);
-
 
   const handleSelectMedicine = (medicine) => {
     const { name, manufacturer, type, skuid,composition,price,quantity,label,} = medicine;
@@ -137,7 +129,7 @@ const Form = () => {
 
           {openModel ? (
             <Model
-              queryData={queryData}
+              queryData={ queryData}
               handleSelectMedicine={handleSelectMedicine}
             />
           ) : null}

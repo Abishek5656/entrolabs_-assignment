@@ -1,7 +1,14 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-const InputButton = ({ name, label, type, placeholder, value, onChange }) => {
+const InputButton = ({
+  name,
+  label,
+  type,
+  placeholder = "",
+  value,
+  onChange,
+}) => {
   return (
     <div className="flex flex-col">
       <label className="font-bold">{label}</label>
@@ -21,15 +28,10 @@ const InputButton = ({ name, label, type, placeholder, value, onChange }) => {
 InputButton.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['text', 'number', 'email']).isRequired,
+  type: PropTypes.oneOf(["text", "number", "email"]).isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-InputButton.defaultProps = {
-  placeholder: '',
-};
-
 export default memo(InputButton);
-

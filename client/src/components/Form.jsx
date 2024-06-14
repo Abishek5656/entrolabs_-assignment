@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData.js";
+import { toast } from "react-toastify";
 import { Title, Modal, MenuList, InputButton } from "../shared/index.js";
 
 const Form = () => {
@@ -94,11 +96,17 @@ const Form = () => {
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
       <Link
         to={"/"}
-        className=" m-2 group relative max-w-52 h-[40px] text-center
-       py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+        className="flex items-center gap-2 m-2 group relative h-[30px] w-[150px]
+       py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-300"
       >
-        Back to Home Page
+        <IoMdArrowRoundBack size={20}  />
+        Home Page
       </Link>
+    
+     
+
+     
+      
 
       <Title title="New Sku" />
       <form className="mt-5 h-full w-full space-y-5" onSubmit={handleSubmit}>

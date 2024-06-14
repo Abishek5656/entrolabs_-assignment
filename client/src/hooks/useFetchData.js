@@ -44,7 +44,7 @@ const useFetchData = (url, formDataName) => {
 
   }, [])
 
-  return { queryData,listOfRecords };
+  return { queryData, listOfRecords };
 };
 
 export default useFetchData;

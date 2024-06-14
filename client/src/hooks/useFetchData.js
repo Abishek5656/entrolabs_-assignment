@@ -20,10 +20,8 @@ const useFetchData = (url, formDataName) => {
     if (formDataName) {
       fetchData();
     }
-
-    // Cleanup function if needed
     return () => {
-      // Cleanup code here if needed
+    
     };
   }, [url, formDataName]);
 

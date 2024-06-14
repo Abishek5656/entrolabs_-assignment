@@ -3,10 +3,25 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Medicine } from "../models/medicine.model.js";
 
+
+
+
+const getRecords = asyncHandler( async(req, res) => {
+
+   const medicineRecords = await Medicine.find();
+
+   if(medicineRecords.length === 0) {
+     return res.status(400).json(new ApiError(400, "Medicine Records Not Found"))
+   }
+
+   return res.status(200).json(new ApiResponse(200, medicineRecords))
+})
+
+
 const createMedicine = asyncHandler(async (req, res) => {
   const {
     name,
-    manufactutrer,
+    manufacturer,
     skuType,
     skuId,
     skuLabel,
@@ -24,7 +39,7 @@ const createMedicine = asyncHandler(async (req, res) => {
   // Create the Medicine
   const medicine = await Medicine.create({
     name,
-    manufactutrer,
+    manufacturer,
     skuType,
     skuLabel,
     skuId,
@@ -45,4 +60,5 @@ const createMedicine = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201,{} ,"Medicine successfully saved"));
 });
 
-export { createMedicine };
+
+export { createMedicine, getRecords };

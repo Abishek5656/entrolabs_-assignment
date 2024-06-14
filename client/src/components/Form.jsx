@@ -1,12 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useMemo, useEffect, useState } from "react";
+import InputButton from "../shared/InputButton.jsx";
+import Model from "../shared/Modal.jsx";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import Title from "./Title.jsx";
-import MenuList from "./MenuList.jsx";
 import { toast } from "react-toastify";
 import { RxCrossCircled } from "react-icons/rx";
+import { Link, useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     manufacturer: "",
@@ -29,40 +32,42 @@ const Form = () => {
     });
   };
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.91.care/pharmap/new/search.php?q=${formData?.name}`
-      );
-      setQueryDate(response?.data?.sku);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
   useEffect(() => {
-    let timeout;
-    if (formData.name.length > 0) {
-      timeout = setTimeout(() => {
-        getData();
-      }, 100);
-    }
-
-    return () => {
-      clearTimeout(timeout);
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.91.care/pharmap/new/search.php?q=${formData?.name}`
+        );
+        setQueryDate(response?.data?.sku);
+       console.log(response?.data?.sku)
+      } catch (error) {
+        toast.error(error.message);
+      }
     };
+
+    getData();
   }, [formData.name]);
 
   const handleSelectMedicine = (medicine) => {
-    const { name, manufacturer, type, skuid, composition, price, quantity } =
-      medicine;
+    console.log("medicine");
+    console.log(medicine);
+    const {
+      name,
+      manufacturer,
+      type,
+      skuid,
+      composition,
+      price,
+      quantity,
+      label,
+    } = medicine;
     setModel(false);
     setFormData({
       name,
       manufacturer,
       skuType: type,
       skuId: skuid,
-      skuLabel: "",
+      skuLabel: label,
       composition,
       price,
       quantity,
@@ -72,6 +77,8 @@ const Form = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    // console.log("submit forma");
+    // console.log(formData);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
@@ -93,6 +100,8 @@ const Form = () => {
       price: "",
     });
     setLoading(false);
+
+    navigate("/");
   };
 
   const handleRemoveText = () => {
@@ -119,14 +128,13 @@ const Form = () => {
           <div className="relative">
             <input
               name="name"
-              className=" appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               type="text"
               placeholder="Enter at least 4 Characters"
               value={formData.name}
               onChange={handleChange}
               onFocus={() => setModel(true)}
             />
-
             {formData.name.length > 0 ? (
               <RxCrossCircled
                 className="absolute top-5 right-3"
@@ -137,33 +145,22 @@ const Form = () => {
           </div>
 
           {openModel ? (
-            <div className="shadow-2xl absolute top-20 z-30 w-full max-h-44 overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
-              {queryData?.length > 0 ? (
-                queryData.map((medicine) => (
-                  <MenuList
-                    medicine={medicine}
-                    key={uuidv4()}
-                    handleSelectMedicine={handleSelectMedicine}
-                  />
-                ))
-              ) : (
-                <p>No results</p>
-              )}
-            </div>
+            <Model
+            queryData={queryData}
+              handleSelectMedicine={handleSelectMedicine}
+            />
           ) : null}
         </div>
 
         {/* Manufacturer */}
-        <div className=" flex flex-col">
-          <label className="font-bold">Manufacturer</label>
-          <input
-            name="manufacturer"
-            className="appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="text"
-            value={formData.manufacturer}
-            onChange={handleChange}
-          />
-        </div>
+        <InputButton
+          name="manufacturer"
+          label="Manufacturer"
+          type="text"
+          placeholder=""
+          value={formData.manufacturer}
+          onChange={handleChange}
+        />
 
         {/* SKU Type */}
         <div className="flex flex-col">
@@ -178,81 +175,67 @@ const Form = () => {
             <option value="allopathy">allopathy</option>
             <option value="otc">otc</option>
             <option value="fmcg">fmcg</option>
+            <option value="drug">drug</option>
           </select>
         </div>
 
         {/* SKUID */}
-        <div className=" flex flex-col">
-          <label className="font-bold">SKUID</label>
-          <input
-            name="skuId"
-            className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="text"
-            value={formData.skuId}
-            onChange={handleChange}
-          />
-        </div>
+
+        <InputButton
+          name="skuId"
+          label="SKUID"
+          type="text"
+          placeholder=""
+          value={formData.skuId}
+          onChange={handleChange}
+        />
 
         {/* SKU Label */}
-
-        <div className="flex flex-col">
-          <label className="font-bold">SKU Label</label>
-          <input
-            name="skuLabel"
-            className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="text"
-            value={formData.skuLabel}
-            onChange={handleChange}
-          />
-        </div>
+        <InputButton
+          name="skuLabel"
+          label="SKU Label"
+          type="text"
+          placeholder=""
+          value={formData.skuLabel}
+          onChange={handleChange}
+        />
 
         {/* Composition */}
-        <div className=" flex flex-col">
-          <label className="font-bold">Composition</label>
-          <input
-            name="composition"
-            className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="text"
-            value={formData.composition}
-            onChange={handleChange}
-          />
-        </div>
+        <InputButton
+          name="composition"
+          label="Composition"
+          type="text"
+          placeholder=""
+          value={formData.composition}
+          onChange={handleChange}
+        />
 
         {/* Quantity in Package */}
-
-        <div className=" flex flex-col">
-          <label className="font-bold">Quantity in Package</label>
-          <input
-            name="quantity"
-            className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="number"
-            min={0}
-            placeholder="quantity"
-            value={formData.quantity}
-            onChange={handleChange}
-          />
-        </div>
+        <InputButton
+          name="quantity"
+          label="Quantity in Package"
+          type="number"
+          placeholder="quantity"
+          value={formData.quantity}
+          onChange={handleChange}
+        />
 
         {/* Price */}
-        <div className=" flex flex-col">
-          <label className="font-bold">Price(MRP)</label>
-          <input
-            name="price"
-            className="appearance-none block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            type="number"
-            min={0}
-            placeholder="price"
-            value={formData.price}
-            onChange={handleChange}
-          />
-        </div>
+        <InputButton
+          name="price"
+          label="Price"
+          type="number"
+          placeholder="price"
+          value={formData.price}
+          onChange={handleChange}
+        />
 
         <div>
           <button
             disabled={loading}
             type="submit"
             className={`group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
-              ${loading ? "bg-blue-200" : "bg-blue-600 hover:bg-blue-700"}`}
+    ${loading ? "bg-blue-200" : "bg-blue-600 hover:bg-blue-700"}`}
           >
             {loading ? <p>Loading</p> : <p>Submit</p>}
           </button>

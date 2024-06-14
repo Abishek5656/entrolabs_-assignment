@@ -4,7 +4,7 @@ import Medicines from "../components/Medicines.jsx";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className='mb-5'>
         <Medicines />
     </div>
   )

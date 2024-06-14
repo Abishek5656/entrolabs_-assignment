@@ -11,20 +11,6 @@ const Medicines = () => {
 
   return (
     <div className="flex flex-col border border-red-900 border-solid h-full w-full px-4">
-      {/* <div className="flex flex-row justify-between items-center my-5">
-        <h1 className="text-center font-bold">List of Records</h1>
-        <Link
-          to={"/form"}
-          className="group relative w-[90px] h-[50px] flex justify-center py-2
-       px-4 border border-transparent
-       text-sm font-medium rounded-md text-white
-      bg-blue-600 hover:bg-blue-700"
-        >
-          Add Medicine
-        </Link>
-      </div> */}
-
-
       <div className="mt-2 flex justify-between">
         <Title title="List Of Records"/>
         <div className="flex justify-between items-center gap-3">

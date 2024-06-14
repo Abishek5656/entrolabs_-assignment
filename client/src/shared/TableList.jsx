@@ -14,7 +14,7 @@ const TableList = ({ listOfRecords, query }) => {
 
   return (  
 
-<div class="relative overflow-x-auto mt-2">
+<div class="relative overflow-x-auto  overflow-y-auto mt-2">
     <table class="w-full text-sm text-left rtl:text-right">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
@@ -43,6 +43,8 @@ const TableList = ({ listOfRecords, query }) => {
           })} 
         </tbody>
     </table>
+
+    { filteredData.length === 0 && <p className="mt-5 text-center font-medium">Search Result not found</p>} 
 </div>
 
   );

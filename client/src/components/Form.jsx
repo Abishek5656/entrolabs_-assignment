@@ -2,15 +2,12 @@ import React, { Fragment, useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData.js";
-
-// import Title from "../shared/Title.jsx";
-// import Modal from "../shared/Modal.jsx";
-// import MenuList from "../shared/MenuList.jsx";
-// import InputButton from "../shared/InputButton.jsx";
 import { Title, Modal, MenuList, InputButton } from "../shared/index.js";
 
 const Form = () => {
+
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     manufacturer: "",
@@ -21,6 +18,7 @@ const Form = () => {
     quantity: "",
     price: "",
   });
+
   const [openModel, setModel] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -28,8 +26,6 @@ const Form = () => {
     "https://api.91.care/pharmap/new/search.php",
     formData?.name
   );
-
-  console.log("queryData in form component", queryData);
 
   const handleChange = (e) => {
     setFormData({
@@ -63,8 +59,8 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
@@ -106,7 +102,7 @@ const Form = () => {
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
       <Link
         to={"/"}
-        className=" m-2 group relative w-[200px] h-[40px] text-center
+        className=" m-2 group relative max-w-52 h-[40px] text-center
        py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
       >
         Back to Home Page

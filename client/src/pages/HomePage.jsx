@@ -1,11 +1,11 @@
 import React from 'react';
-import ListofMedicine from "../components/ListofMedicine.jsx";
+import Medicines from "../components/Medicines.jsx";
 
 
 const HomePage = () => {
   return (
     <div>
-        <ListofMedicine />
+        <Medicines />
     </div>
   )
 }

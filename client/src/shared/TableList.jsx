@@ -18,7 +18,7 @@ const TableList = ({ listOfRecords, query }) => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
             {tableHeaders.map((header) => (
-              <th scope="col" className="px-6 py-3" key={uuidv4()}>
+              <th scope="col" className="px-3 py-3" key={uuidv4()}>
                 {header}
               </th>
             ))}

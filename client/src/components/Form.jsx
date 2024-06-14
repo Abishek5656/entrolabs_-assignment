@@ -4,6 +4,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import useFetchData from "../hooks/useFetchData.js";
 import { toast } from "react-toastify";
+import axios from 'axios';
+
 import { Title, Modal, MenuList, InputButton } from "../shared/index.js";
 
 const Form = () => {
@@ -53,13 +55,17 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+    console.log("submit")
     setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
         formData
       );
+      console.log("response")
+      console.log((response))
       toast.success(response?.data?.message);
       navigate("/");
     } catch (error) {

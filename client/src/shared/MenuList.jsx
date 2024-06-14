@@ -9,12 +9,12 @@ const MenuList = ({ medicine, handleSelectMedicine }) => {
             onClick={() => handleSelectMedicine(medicine)}
           >
             <h1 className="text-lg font-semibold">{name}</h1>
-            <div className="flex gap-2 justify-between items-center">
+            <div className="flex gap-1 justify-between items-center">
               <p>{manufacturer}</p>|
               <span className="text-blue-600">{label}</span>|
-              <p>MRP {price}</p>
+              <p>MRP{price}</p>
             </div>
-            <hr className="mt-1 bottom-2 border-red-600 border-solid" />
+            <hr className="mt-1 border-2 border-green-600 border-solid" />
           </div>
   );
 };

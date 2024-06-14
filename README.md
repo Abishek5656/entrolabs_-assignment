@@ -1,6 +1,6 @@
 
 ## Demo
-https://github.com/Abishek5656/entrolabs_-assignment/assets/99088871/06886636-04e4-42b5-9a78-2ee89b0b16fd
+
 
 ## Prerequisites
  Node version 20.x

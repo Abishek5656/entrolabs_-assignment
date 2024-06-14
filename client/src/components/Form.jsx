@@ -39,28 +39,16 @@ const Form = () => {
           `https://api.91.care/pharmap/new/search.php?q=${formData?.name}`
         );
         setQueryDate(response?.data?.sku);
-       console.log(response?.data?.sku)
       } catch (error) {
         toast.error(error.message);
       }
     };
-
     getData();
   }, [formData.name]);
 
+
   const handleSelectMedicine = (medicine) => {
-    console.log("medicine");
-    console.log(medicine);
-    const {
-      name,
-      manufacturer,
-      type,
-      skuid,
-      composition,
-      price,
-      quantity,
-      label,
-    } = medicine;
+    const { name, manufacturer, type, skuid,composition,price,quantity,label,} = medicine;
     setModel(false);
     setFormData({
       name,
@@ -77,15 +65,13 @@ const Form = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    // console.log("submit forma");
-    // console.log(formData);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
         formData
       );
-
       toast.success(response?.data?.message);
+      navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -100,8 +86,6 @@ const Form = () => {
       price: "",
     });
     setLoading(false);
-
-    navigate("/");
   };
 
   const handleRemoveText = () => {
@@ -120,10 +104,17 @@ const Form = () => {
 
   return (
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
+
+      <Link to={"/"} className=" m-2 group relative w-[200px] h-[40px] text-center
+       py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+        Back to Home Page
+      </Link>
+
       <Title title="New Sku" />
       <form className="mt-5 h-full w-full space-y-5" onSubmit={handleSubmit}>
         {/* Name */}
         <div className="flex flex-col relative">
+
           <label className="font-bold">Name</label>
           <div className="relative">
             <input
@@ -146,7 +137,7 @@ const Form = () => {
 
           {openModel ? (
             <Model
-            queryData={queryData}
+              queryData={queryData}
               handleSelectMedicine={handleSelectMedicine}
             />
           ) : null}
@@ -180,7 +171,6 @@ const Form = () => {
         </div>
 
         {/* SKUID */}
-
         <InputButton
           name="skuId"
           label="SKUID"

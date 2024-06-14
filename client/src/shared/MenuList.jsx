@@ -24,7 +24,7 @@ MenuList.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     manufacturer: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     skuid: PropTypes.string.isRequired,
   }).isRequired,
   handleSelectMedicine: PropTypes.func.isRequired,

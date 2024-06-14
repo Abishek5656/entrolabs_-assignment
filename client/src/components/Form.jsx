@@ -103,11 +103,7 @@ const Form = () => {
         Home Page
       </Link>
     
-     
-
-     
-      
-
+    
       <Title title="New Sku" />
       <form className="mt-5 h-full w-full space-y-5" onSubmit={handleSubmit}>
         {/* Name */}

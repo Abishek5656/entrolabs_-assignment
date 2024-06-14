@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import MenuList from "./MenuList.jsx";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 
 const Modal = ({ queryData, handleSelectMedicine }) => {
   return (
@@ -21,3 +22,7 @@ const Modal = ({ queryData, handleSelectMedicine }) => {
 };
 
 export default memo(Modal);
+
+Modal.propTypes = {
+  handleSelectMedicine:PropTypes.func.isRequired,
+};

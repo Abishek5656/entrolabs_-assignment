@@ -1,9 +1,24 @@
-import React from 'react'
+// import React from 'react'
 
-const Title = ( { title}) => {
+// const Title = ( { title}) => {
+//   return (
+//     <h1 className="text-2xl uppercase">{title}</h1>
+//   )
+// }
+
+// export default Title
+
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const Title = ({ title }) => {
   return (
     <h1 className="text-2xl uppercase">{title}</h1>
-  )
+  );
 }
 
-export default Title
+Title.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default Title;

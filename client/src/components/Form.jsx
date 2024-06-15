@@ -99,8 +99,8 @@ const Form = () => {
     <div className="max-w-2xl h-full flex flex-col mt-4 mx-3 sm:mx-auto p-2 border border-black-800 border-solid">
       <Link
         to={"/"}
-        className="flex items-center gap-2 m-2 group relative h-[30px] w-[150px]
-       py-2 px-3 underline text-sm font-medium rounded-md text-blue-500"
+        className="flex items-center gap-2  group relative h-[30px] w-[150px]
+       py-2  underline text-sm font-medium rounded-md text-blue-500"
       >
         <IoMdArrowRoundBack size={20}  />
         Home Page

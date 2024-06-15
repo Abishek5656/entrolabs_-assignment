@@ -27,4 +27,5 @@ export default memo(Modal);
 
 Modal.propTypes = {
   handleSelectMedicine:PropTypes.func.isRequired,
+  setModel:PropTypes.func.isRequired
 };

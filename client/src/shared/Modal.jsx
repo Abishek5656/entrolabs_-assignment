@@ -3,7 +3,7 @@ import MenuList from "./MenuList.jsx";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
-const Modal = ({ queryData, handleSelectMedicine, setModel }) => {
+const Modal = ({ queryData, handleSelectMedicine, setModel, name }) => {
   return (
     <div className="shadow-2xl absolute top-20 z-30 w-full max-h-44 overflow-scroll bg-gray-200 space-y-4 p-1 rounded">
       {queryData?.length > 0 ? (
@@ -16,7 +16,7 @@ const Modal = ({ queryData, handleSelectMedicine, setModel }) => {
         ))
       ) : (
         <button onClick={()=> setModel(false)}>
-          Create a new Record
+          {name}
         </button>
       )}
     </div>
@@ -27,5 +27,6 @@ export default memo(Modal);
 
 Modal.propTypes = {
   handleSelectMedicine:PropTypes.func.isRequired,
-  setModel:PropTypes.func.isRequired
+  setModel:PropTypes.func.isRequired,
+  name:PropTypes.string.isRequired
 };

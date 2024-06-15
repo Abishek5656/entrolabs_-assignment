@@ -136,6 +136,7 @@ const Form = () => {
               queryData={queryData}
               handleSelectMedicine={handleSelectMedicine}
               setModel={setModel}
+              name={formData.name}
             />
           ) : null}
         </div>

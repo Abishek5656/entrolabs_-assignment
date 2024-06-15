@@ -57,15 +57,12 @@ const Form = () => {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-    console.log("submit")
     setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_ENDPOINT}/api/v1/medicine/create`,
         formData
       );
-      console.log("response")
-      console.log((response))
       toast.success(response?.data?.message);
       navigate("/");
     } catch (error) {
@@ -138,6 +135,7 @@ const Form = () => {
             <Modal
               queryData={queryData}
               handleSelectMedicine={handleSelectMedicine}
+              setModel={setModel}
             />
           ) : null}
         </div>

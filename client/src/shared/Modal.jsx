@@ -16,7 +16,7 @@ const Modal = ({ queryData, handleSelectMedicine, setModel, name }) => {
         ))
       ) : (
         <button onClick={()=> setModel(false)}>
-          {name}
+          Create {`${name}`}
         </button>
       )}
     </div>
